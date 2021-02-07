@@ -1,0 +1,7 @@
+org\example\model\Weight.class
+org\example\util\Index.class
+org\example\model\Result.class
+org\example\util\Parser.class
+org\example\Servlet\SearchServlet.class
+org\example\Servlet\SearchServlet$1.class
+org\example\model\DocInfo.class
