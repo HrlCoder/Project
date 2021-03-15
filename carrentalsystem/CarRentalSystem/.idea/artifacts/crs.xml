@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="crs">
+    <output-path>$PROJECT_DIR$/out/artifacts/crs</output-path>
+    <root id="archive" name="crs.war" />
+  </artifact>
+</component>

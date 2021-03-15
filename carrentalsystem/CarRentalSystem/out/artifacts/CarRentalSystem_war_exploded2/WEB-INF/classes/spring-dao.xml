@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--引入数据源-->
+    <context:property-placeholder location="classpath:dataconnection.properties"/>
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--sqlSessionFatory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫面对应的mapper.xml文件-->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mapper/*/*Mapper.xml</value>
+            </array>
+        </property>
+        <!-- 配置分页插件  pagehelper-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor"></bean>
+            </array>
+        </property>
+    </bean>
+    <!--扫描mapper接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage">
+            <array>
+                <value>
+                        com.jian.bus.mapper
+                        com.jian.sys.mapper
+                </value>
+            </array>
+        </property>
+    </bean>
+</beans>
